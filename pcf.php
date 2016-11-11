@@ -93,15 +93,12 @@ class PostmanCanFail
      */
     public function send(PostmanError $error)
     {
-        $results = [];
         if ($this->loggingViaMailIsEnabled()) {
-            $results['mail'] = $this->sendViaMail($error);
+            $this->sendViaMail($error);
         }
         if ($this->loggingViaRollbarIsEnabled()) {
-            $results['rollbar'] = $this->sendViaRollbar($error);
+            $this->sendViaRollbar($error);
         }
-
-        return $results;
     }
 
     /**
