@@ -106,7 +106,7 @@
                         <label>
                             <input type="radio" name="pcf_enable_type"
                                    value="99" <?php checked(get_option('pcf_enable_type'),
-                                3) ?>>
+                                99) ?>>
                             Notice via both Rollbar and mail()
                         </label>
                     </td>

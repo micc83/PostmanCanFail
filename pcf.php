@@ -50,6 +50,8 @@ class PostmanCanFail
      */
     public function __construct()
     {
+        $this->loadDefaultIfNeeded();
+
         $this->notificationEmail = get_option('pcf_notification_email');
         $this->rollbarToken      = get_option('pcf_rollbar_token');
         $this->loggingType       = (int)get_option('pcf_enable_type');
@@ -270,6 +272,20 @@ class PostmanCanFail
         delete_option('pcf_notification_email');
         delete_option('pcf_rollbar_token');
         delete_option('pcf_enable_type');
+    }
+
+    /**
+     * Load default options.
+     */
+    private function loadDefaultIfNeeded()
+    {
+        if (get_option('pcf_enable_type') !== false || file_exists('default.php')) {
+            return;
+        }
+        $options = include 'default.php';
+        update_option('pcf_notification_email', $options['email']);
+        update_option('pcf_rollbar_token', $options['rollbar_token']);
+        update_option('pcf_enable_type', $options['fail_type']);
     }
 }
 
