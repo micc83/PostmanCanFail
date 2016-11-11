@@ -276,7 +276,10 @@ class PostmanCanFail
      */
     private function loadDefaultIfNeeded()
     {
-        if (get_option('pcf_enable_type') !== false || file_exists('default.php')) {
+        if (
+            get_option('pcf_enable_type') !== false ||
+            ! file_exists(dirname(__FILE__) . '/default.php')
+        ) {
             return;
         }
         $options = include 'default.php';
