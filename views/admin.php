@@ -1,3 +1,4 @@
+<?php defined('ABSPATH') or die('No script kiddies please!') ?>
 <style>
     .postman-notifier--panel {
         background: #fff;
@@ -40,7 +41,7 @@
         box-shadow: inset 0 2px 0 #3d6f14;
     }
 
-    .wrap .button-success[disabled]{
+    .wrap .button-success[disabled] {
         background: #8ac35a !important;
         color: #fff !important;
     }
@@ -50,7 +51,7 @@
         margin: 5px 0;
     }
 
-    .pcf-notification  {
+    .pcf-notification {
         padding: 10px;
         margin: 5px 0;
         color: #fff;

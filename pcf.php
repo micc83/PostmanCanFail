@@ -18,6 +18,9 @@ include 'models/PostmanError.php';
  */
 class PostmanCanFail
 {
+    /**
+     * Rollbar API endpoint.
+     */
     const ROLLBAR_ENDPOINT = 'https://api.rollbar.com/api/1/item/';
 
     /**
@@ -64,19 +67,18 @@ class PostmanCanFail
      * Postman log each sent message as a post and the
      * post excerpt is used for error messages so...
      *
-     * @param $data
+     * @param array $data
      *
      * @return mixed
      */
     public function listenForNewPostmanLog($data)
     {
-        if ('postman_sent_mail' === $data['post_type'] && trim($data['post_excerpt'])) {
-            $error = new PostmanError($data);
-            try {
-                $this->send($error);
-            } catch (Exception $e) {
-                // Do nothing...
+        try {
+            if ('postman_sent_mail' === $data['post_type'] && trim($data['post_excerpt'])) {
+                $this->send(new PostmanError($data));
             }
+        } catch (Exception $e) {
+            // Do nothing...
         }
 
         return $data;
@@ -215,6 +217,7 @@ class PostmanCanFail
     public function testConfig()
     {
         if (
+            ! is_super_admin() ||
             empty($_POST['pcf_enable_type']) ||
             ! isset($_POST['pcf_rollbar_token']) ||
             ! isset($_POST['pcf_notification_email'])
