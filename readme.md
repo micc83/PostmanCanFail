@@ -4,7 +4,7 @@ A simple plugin that reads Postman SMTP Mailer logs and send a notice via `mail(
 <?php
 // pcf/default.php
 return [
-    'fail_type'     => 99, // 99: both, 1: mail, 2: Rollbar 
+    'fail_type'     => PostmanCanFail::LOG_VIA_BOTH, // or LOG_VIA_MAIL or LOG_VIA_ROLLBAR
     'email'         => 'example@example.it',
     'rollbar_token' => 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxx'
 ];
